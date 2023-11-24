@@ -46,3 +46,28 @@
     - 实现特定状态下的行为
   - 上下文（原始对象）
     - 维护状态的引用
+## 责任链模式
+- 角色
+  - 处理器接口
+    - nextHandler(Handler handler);
+    - handleRequest(Request request);
+```java
+
+public static class Builder {
+    private Handler head;
+    private Handler tail;
+    public Builder addHandler(Handler handler) {
+        if(head == null) {
+            head = tail = handler;
+            return this;
+        }
+        tail.nextHandler(handler);
+        tail = handler;
+        return this;
+    }
+
+    public Handler build() {
+        return head;
+    }
+}
+```
